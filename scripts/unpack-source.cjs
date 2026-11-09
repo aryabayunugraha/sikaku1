@@ -6,7 +6,7 @@ const zlib = require('node:zlib');
 const root = process.cwd();
 const sourceDir = path.join(root, 'source');
 const chunks = fs.existsSync(sourceDir)
-  ? fs.readdirSync(sourceDir).filter((name) => /^bundle-\d+\.b64$/.test(name)).sort()
+  ? fs.readdirSync(sourceDir).filter((name) => /^bundle-\d{4}\.b64$/.test(name)).sort()
   : [];
 if (!chunks.length) throw new Error(`Source bundle tidak ditemukan di: ${sourceDir}`);
 const encoded = chunks.map((name) => fs.readFileSync(path.join(sourceDir, name), 'utf8').replace(/\s+/g, '')).join('');
